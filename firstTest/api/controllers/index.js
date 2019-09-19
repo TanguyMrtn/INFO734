@@ -1,32 +1,3 @@
-// function getTodos(req,res) {
-//     res.send('get Todos');
-// }
-
-// module.exports.getTodos=getTodos;
-
-// function getTodo(req,res) {
-//     res.send(' get todo');
-// }
-// module.exports.getTodo=getTodo;
-
-// function postTodo(req,res){
-//     res.send('post todo');
-// }
-
-// module.exports.postTodo=postTodo;
-
-// function putTodo(req,res) {
-//     res.send('update todo');
-// }
-
-// module.exports.putTodo=putTodo;
-
-// function deleteTodo(req,res) {
-//     res.send('delete todo');
-// }
-
-
-
 function getAllTodos(req, res) {
   const Todo = require('../../todo/models');
 
@@ -100,9 +71,52 @@ function deleteTodo(req, res) {
   });
 }
 
+function doneTodo(req,res) {
+  const Todo = require('../../todo/models');
+
+  Todo.findOneAndUpdate(
+        {_id : req.params.id},
+        {done : true}, function(err,todo) {
+    if (err) throw err;
+
+    res.json({info: 'Success'});
+  });
+}
+
+function getDone(req,res) {
+  const Todo = require('../../todo/models');
+
+  Todo.find({done : req.params.done},function(err,doneres) {
+    if (err) throw err;
+    res.json(doneres);
+  });
+}
+
+function doneTodos(req,res) {
+  const Todo = require('../../todo/models');
+
+  Todo.find({done : true},function(err,todos) {
+    if (err) throw err;
+    res.json(todos);
+  });
+}
+
+function currentTodos(req,res) {
+  const Todo = require('../../todo/models');
+
+  Todo.find({done : false},function(err,todos) {
+    if (err) throw err;
+    res.json(todos);
+  });
+}
+
 module.exports.getAllTodos = getAllTodos;
 module.exports.getOneTodo = getOneTodo;
 module.exports.createTodo = createTodo;
 module.exports.modifyTodo = modifyTodo;
 module.exports.deleteTodo = deleteTodo;
+module.exports.doneTodo = doneTodo;
+module.exports.getDone = getDone;
+module.exports.doneTodos = doneTodos;
+module.exports.currentTodos = currentTodos;
 
