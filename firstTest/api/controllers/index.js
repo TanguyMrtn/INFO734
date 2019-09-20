@@ -83,6 +83,18 @@ function doneTodo(req,res) {
   });
 }
 
+function currentTodo(req,res) {
+  const Todo = require('../../todo/models');
+
+  Todo.findOneAndUpdate(
+        {_id : req.params.id},
+        {done : false}, function(err,todo) {
+    if (err) throw err;
+
+    res.json({info: 'Success'});
+  });
+}
+
 function getDone(req,res) {
   const Todo = require('../../todo/models');
 
@@ -119,4 +131,5 @@ module.exports.doneTodo = doneTodo;
 module.exports.getDone = getDone;
 module.exports.doneTodos = doneTodos;
 module.exports.currentTodos = currentTodos;
+module.exports.currentTodo = currentTodo;
 

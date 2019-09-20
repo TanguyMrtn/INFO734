@@ -2,7 +2,10 @@ const express = require('express');
 
 const app = express();
 const APIRoutes = require('./api/routes/');
+const TodoRoutes = require('./todo/routes');
 
+//Le parser est nécessaire (cela fait partie des aberrations) car par défaut le serveur Node n'accepte pas les données du client, il faut donc un middleware (body-parser) pour ça. 
+//On l'oublie => que des None pour les valeurs
 //Pour les données de formulaire, IL FAUT LE METTRE AVANT LE APP.USE
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded ( {
@@ -16,6 +19,7 @@ app.use(bodyParser.json());
 
 
 app.use(APIRoutes);
+app.use(TodoRoutes);
 
 
 app.listen(3000);
@@ -34,5 +38,10 @@ mongoose.connect(database,(err)=> {
 	console.log('Connect to the database');
 });
 
-//Le parser est nécessaire (cela fait partie des aberrations) car par défaut le serveur Node n'accepte pas les données du client, il faut donc un middleware (body-parser) pour ça. 
-//On l'oublie => que des None pour les valeurs
+
+const path = require('path');
+let dirViews = [path.join(__dirname,'todo/views')];
+app.set('views',dirViews);
+app.set('view engine','ejs');
+
+

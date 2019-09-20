@@ -36,4 +36,8 @@ router.get('/api/todos/current',(req,res)=>{
    controller.currentTodos(req,res);
 });
 
+router.put('/api/todo/current/:id',(req,res)=>{
+    controller.currentTodo(req,res);
+});
+
 module.exports=router;
