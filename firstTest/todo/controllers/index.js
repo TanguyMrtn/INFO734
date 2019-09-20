@@ -1,7 +1,34 @@
-function getAllTodos(req, res) {
+//function getAllTodos(req, res) {
   
-  res.render('fiche',{Title:'Info734'});
+//  res.render('fiche',{Title:'ROSA IS THE WEIRDEST RANDOM EVER'});
+
+//}
+
+function getAllTodos(req, res) {
+  const Todo = require('../../todo/models');
+
+  Todo.find({}, function(err, todos) {
+
+    if (err) throw err;
+
+    res.render('todos',{todos:todos})
+
+  });
+
+}
+
+function getOneTodo(req, res) {
+  const Todo = require('../../todo/models');
+
+  Todo.find({_id : req.params.id}, function(err, todo) {
+
+    if (err) throw err;
+
+    res.render('todo',{todo:todo});
+
+  });
 
 }
 
 module.exports.getAllTodos = getAllTodos;
+module.exports.getOneTodo = getOneTodo;
