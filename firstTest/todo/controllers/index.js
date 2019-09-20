@@ -24,7 +24,7 @@ function getOneTodo(req, res) {
 
     if (err) throw err;
 
-    res.render('todo',{todo:todo});
+    res.render('todo',{todo:todo[0]});
 
   });
 

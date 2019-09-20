@@ -40,4 +40,8 @@ router.put('/api/todo/current/:id',(req,res)=>{
     controller.currentTodo(req,res);
 });
 
+router.get('/api/delete/todo/:id',(req,res)=>{
+    controller.deleteTodo(req,res);
+});
+
 module.exports=router;
