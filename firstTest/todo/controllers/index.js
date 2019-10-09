@@ -1,9 +1,3 @@
-//function getAllTodos(req, res) {
-  
-//  res.render('fiche',{Title:'ROSA IS THE WEIRDEST RANDOM EVER'});
-
-//}
-
 function getAllTodos(req, res) {
   const Todo = require('../../todo/models');
 

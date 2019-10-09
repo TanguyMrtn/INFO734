@@ -16,9 +16,14 @@ function getOneTodo(req, res) {
 
   Todo.find({_id : req.params.id}, function(err, todo) {
 
+    console.log(req.params.id);
+
     if (err) throw err;
 
-    res.json(todo);
+    res.json(todo[0]);
+
+    console.log(todo[0]);
+
 
   });
 
@@ -61,6 +66,8 @@ function modifyTodo(req, res) {
 
 function deleteTodo(req, res) {
   const Todo = require('../../todo/models');
+
+  console.log("delete in progress");
 
   Todo.findOneAndRemove(
         {_id : req.params.id}, function(err, todo) {
