@@ -36,13 +36,26 @@ export class HomePage {
 
   }
 
-  done(id: any) {
-    console.log("done");
+  async deleteTodo(id:any) {
+    const loading = await this.loadingController.create({
+      message: 'Loading'
+    });
+
+    await loading.present();
+    await this.api.deleteTodo(id)
+      .subscribe(res => {
+        console.log(res);
+        this.todos = res;
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        loading.dismiss();
+      });
+
   }
 
-  delete(id:any) {
-    console.log(id);
-    this.api.deleteTodo(id);
+  done(id: any) {
+    console.log("done");
   }
 
   ngOnInit() {
